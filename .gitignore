@@ -42,8 +42,8 @@ env/
 Thumbs.db
 
 # Data (uncomment if you don't want to track data files)
-# data/raw/*.csv
-# data/raw/*.xlsx
+data/raw/*.csv
+data/raw/*.xlsx
 # data/processed/*
 
 # Models
@@ -51,14 +51,9 @@ models/*.pkl
 models/*.joblib
 models/*.h5
 
-# Environment variables
 .env
 .env.local
 
 # Logs
 *.log
 logs/
-
-# Reports (optional - uncomment if you don't want to track generated reports)
-# reports/figures/*.png
-# reports/figures/*.pdf
