@@ -48,6 +48,33 @@ def load_additional_data_guide():
     return pd.read_excel(filepath, sheet_name=None)  # Load all sheets
 
 
+def load_enriched_data():
+    """
+    Load the enriched financial inclusion dataset.
+    
+    Returns:
+        tuple: (main_data DataFrame, impact_links DataFrame)
+    """
+    project_root = Path(__file__).parent.parent
+    filepath = project_root / "data" / "processed" / "ethiopia_fi_unified_data_enriched.xlsx"
+    
+    if not filepath.exists():
+        # Fall back to original data if enriched doesn't exist
+        return load_unified_data()
+    
+    # Load the main data sheet
+    main_data = pd.read_excel(filepath, sheet_name=0)
+    
+    # Load the impact_links sheet
+    try:
+        impact_links = pd.read_excel(filepath, sheet_name=1)
+    except:
+        impact_links = main_data[main_data['record_type'] == 'impact_link'].copy()
+        main_data = main_data[main_data['record_type'] != 'impact_link'].copy()
+    
+    return main_data, impact_links
+
+
 if __name__ == "__main__":
     # Test loading
     print("Loading unified data...")
